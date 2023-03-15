@@ -100,6 +100,8 @@ abstract public class Character{
         return this.mana;
     }
 
+    
+
     /**
     * Get the base damage of the character's attacks.
     * @return The base damage of the character's attacks.
@@ -180,6 +182,16 @@ abstract public class Character{
         }
         if(this.health > this.getMaxHealth()){
             this.health = this.getMaxHealth();
+        }
+    }
+
+    public void modifyMana(int amountMod) {
+        this.mana += amountMod;
+        if(this.mana < 0){
+            this.mana = 0;
+        }
+        if(this.mana > this.getMaxMana()){
+            this.mana = this.getMaxMana();
         }
     }
 

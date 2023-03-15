@@ -19,5 +19,7 @@ public interface Consumable {
      * @param owner the Character consuming this item
      */
     public void consume(Character owner);
+    
+    
 
 }
