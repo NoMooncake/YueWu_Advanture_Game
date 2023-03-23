@@ -12,7 +12,7 @@ public class ManaPotionTest {
     private Character c;
     @BeforeEach
     void setup(){
-        c = new Player("Hero", 100, 9, 7);
+        c = new Player("Hero", 100, 9, 7, 0, 1);
     }
 
     @Test

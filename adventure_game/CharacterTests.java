@@ -12,8 +12,8 @@ public class CharacterTests{
     private Character c,d;
     @BeforeEach
     void setup(){
-        c = new Player("Hero1", 100, 9, 4);
-        d = new Player("Hero2", 100, 9, 4);
+        c = new Player("Hero1", 100, 9, 4, 0, 1);
+        d = new Player("Hero2", 100, 9, 4, 0, 1);
     }
 
     @Test
@@ -55,6 +55,20 @@ public class CharacterTests{
             assertTrue(c.isVulnerable());
         }
     }
+
+    @Test
+    public void testModifyExp() {
+        assertTrue(c.getexp() == 0);
+        c.modifyExp(15);
+        assertTrue(c.getexp() == 15);
+    }
     
+    @Test
+    public void testLevelup() {
+        assertTrue(c.getLevel() == 1);
+        c.modifyExp(15);
+        c.takeTurn(c);
+        assertTrue(c.getLevel() == 2);
+    }
 
 }

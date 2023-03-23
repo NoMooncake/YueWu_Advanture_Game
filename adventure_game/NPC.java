@@ -1,8 +1,8 @@
 package adventure_game;
 public class NPC extends Character{
 
-    public NPC(String name, int health, int mana, int baseDamage){
-        super(name, health, mana, baseDamage);
+    public NPC(String name, int health, int mana, int baseDamage, int exp, int level){
+        super(name, health, mana, baseDamage, exp, level);
     }
 
     @Override

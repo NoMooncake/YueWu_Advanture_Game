@@ -1,6 +1,6 @@
 package adventure_game;
 import java.util.ArrayList;
-
+import java.util.Scanner;
 
 import adventure_game.items.Consumable;
 /**
@@ -16,6 +16,10 @@ abstract public class Character{
     private int baseDamage;
 
     private String name;
+
+    private int exp;
+    private int level;
+    private int maxexp;
 
     private ArrayList<Consumable> items;
 
@@ -34,7 +38,7 @@ abstract public class Character{
     * @param mana The maximum mana points of the character.
     * @param damage The base damage of the character's attacks.
     */
-    public Character(String name, int health, int mana, int damage){
+    public Character(String name, int health, int mana, int damage, int exp, int level){
         this.name = name;
         this.maxHealth = health;
         this.health = health;
@@ -42,6 +46,9 @@ abstract public class Character{
         this.mana = mana;
         this.baseDamage = damage;
         this.tempDamageBuff = 1.0;
+        this.exp = exp;
+        this.maxexp = 10;
+        this.level = level;
         items = new ArrayList<Consumable>();
     }
 
@@ -57,6 +64,8 @@ abstract public class Character{
         output += "hp " + getHealth() + "\n";
         output += "mana " + getMana() + "\n";
         output += "damage " + getBaseDamage() + "\n";
+        output += "exp " + getexp() + "\n";
+        output += "level " + getLevel() + "\n";
         return output;
     }
 
@@ -66,6 +75,14 @@ abstract public class Character{
      */
     public String getName(){
         return this.name;
+    }
+
+    public int getexp(){
+        return this.exp;
+    }
+
+    public int getLevel(){
+        return this.level;
     }
 
     /**
@@ -194,6 +211,61 @@ abstract public class Character{
             this.mana = this.getMaxMana();
         }
     }
+
+    public void modifyExp(int amountExp) {
+        this.exp += amountExp;
+        if(this.exp < 0){
+            this.exp = 0;
+        }
+    }
+
+    public void levelup(){
+
+        int healthpoint = 0;
+        int damagepoint = 0;
+        int manapoint = 0;
+        int stats = 1;
+        
+        System.out.println("You have 1 stat points to spend on your character.");
+        while (stats > 0) {
+            System.out.println("which stat would you like to increase?");
+            System.out.println("1. Health (+10 health points per point)");
+            System.out.println("2. Damage (+1 base damage per point)");
+            System.out.println("3. Mana (+3 mana points per point)");
+            System.out.print("Enter the number of your choice: ");
+            try (Scanner scanner = new Scanner(System.in)) {
+                int choice = scanner.nextInt();
+                switch (choice) {
+                    case 1:
+                        healthpoint++;
+                        stats--;
+                        System.out.printf( "Health increased to %d\n", healthpoint*10);
+                        break;
+                    case 2:
+                        damagepoint++;
+                        stats--;
+                        System.out.printf( "Damage increased to %d\n", damagepoint);
+                        break;
+                    case 3:
+                        manapoint++;
+                        stats--;
+                        System.out.printf( "Mana increased to %d\n", manapoint*3);
+                        break;
+                }
+            }
+        }
+        this.maxHealth = maxHealth + healthpoint*10;
+        this.maxMana = maxMana + manapoint*3;
+        this.health = maxHealth;
+        this.mana = maxMana;
+        this.baseDamage =  baseDamage + damagepoint;
+        this.level = this.level + 1;
+        
+    }
+    public boolean canlevelup(){
+        return this.getexp() >= this.maxexp;
+    }
+
 
     /* CONDITIONS */
 

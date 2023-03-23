@@ -23,7 +23,7 @@ public class Game {
         game.createPlayer();
         System.out.println(game.player.toString());
 
-        NPC opponent = new NPC("Geoff", 200, 0, 10);
+        NPC opponent = new NPC("Geoff", 200, 0, 10, 0, 1);
         System.out.println(opponent.toString());
         game.enterCombat(opponent);
 
@@ -48,6 +48,8 @@ public class Game {
             int damagePoints = 0;
             int manaPoints = 0;
             int statPoints = 20;
+            int exp = 0;
+            int level = 1;
             
             System.out.println("\nYou have 20 stat points to spend on your character.");
             while (statPoints > 0) {
@@ -85,7 +87,7 @@ public class Game {
             System.out.printf("Health: %d\n", healthPoints*10);
             System.out.printf("Damage: %d\n", damagePoints);
             System.out.printf("Mana: %d\n", manaPoints*3);
-            Player player = new Player(name, healthPoints*10, damagePoints, manaPoints*3);
+            Player player = new Player(name, healthPoints*10, damagePoints, manaPoints*3, exp, level);
             player.obtain(new HealingPotion());
         }
     }

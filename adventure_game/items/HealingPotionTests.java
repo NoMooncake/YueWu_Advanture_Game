@@ -14,7 +14,7 @@ public class HealingPotionTests {
     void setup(){
         // TO-DO 
         // Implement this
-        c = new Player("Hero", 100, 9, 7);
+        c = new Player("Hero", 100, 9, 7, 0, 1);
     }
 
     @Test

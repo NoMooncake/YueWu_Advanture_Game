@@ -2,12 +2,17 @@ package adventure_game;
 
 
 public class Player extends Character{
-    public Player(String name, int health, int mana, int baseDamage){
-        super(name, health, mana, baseDamage);
+    public Player(String name, int health, int mana, int baseDamage, int exp, int level){
+        super(name, health, mana, baseDamage, exp, level);
     }
 
     @Override
     public void takeTurn(Character other){
+        if(other.canlevelup()){
+            other.levelup();
+            this.modifyExp(-this.getexp());
+        }
+
         if(this.isStunned()){
             this.decreaseTurnsStunned();
             System.out.printf("%S is unable to take any actions this turn!", this.getName());
